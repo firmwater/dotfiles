@@ -26,7 +26,7 @@ git config --global guitool."Pull Latest Changes from GitHub".cmd "$DOTFILES/bin
 git config --global guitool."Pull Latest Changes from GitHub".confirm no
 git config --global guitool."Push Committed Changes to GitHub".cmd "$DOTFILES/bin/gpush"
 git config --global guitool."Push Committed Changes to GitHub".confirm yes
-git config --global guitool."Open File in Editor".cmd 'gvim "$FILENAME"'
+git config --global guitool."Open File in Editor".cmd 'notepad "$FILENAME"'
 git config --global guitool."Open File in Editor".noconsole yes
 git config --global guitool."View Changes Externally".cmd 'git difftool -- "$FILENAME"'
 git config --global guitool."View Changes Externally".noconsole yes
