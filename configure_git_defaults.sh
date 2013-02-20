@@ -7,7 +7,7 @@ read -p 'Enter Email Address: ' Email
 git config --global user.name "$FullName"
 git config --global user.email "$Email"
 git config --global core.autocrlf false
-git config --global core.editor notepad
+git config --global core.editor vim
 git config --global core.pager "less -q -x4"
 git config --global color.ui auto
 git config --global log.date relative
