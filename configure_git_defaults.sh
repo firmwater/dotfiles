@@ -1,8 +1,15 @@
 #!/bin/sh
 echo Configuring git defaults
 
-read -p 'Enter Full Name: ' FullName
-read -p 'Enter Email Address: ' Email
+FullName=$(git config --global user.name)
+if [ -z "$FullName" ]; then
+	read -p 'Enter Full Name: ' FullName
+fi
+
+Email=$(git config --global user.email)
+if [ -z "$Email" ]; then
+	read -p 'Enter Email Address: ' Email
+fi
 
 git config --global user.name "$FullName"
 git config --global user.email "$Email"
