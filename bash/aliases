@@ -17,19 +17,5 @@ function mkcd() {
 	cd "$1"
 }
 
-# GIT
-alias ga='git add'
-alias gs='git status'
-alias gd='git diff'
-alias gdc='git diff --cached'
-alias gl='git log'
-function gc() {
-	git commit -v -m "$*"
-}
-function gac() {
-	git add -A
-	git commit -v -m "$*"
-}
-
 # RAILS
 alias r='bundle exec rails'
