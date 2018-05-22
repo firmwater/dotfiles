@@ -20,6 +20,7 @@ git config --global color.ui auto
 git config --global log.date relative
 git config --global diff.renames copies
 git config --global push.default upstream
+git config --global branch.autoSetupRebase always
 
 git config --global alias.ca "commit --amend -C HEAD"
 
@@ -34,12 +35,14 @@ git config --global guitool."Pull Latest Changes from GitHub".cmd "$(pwd)/bin/gp
 git config --global guitool."Pull Latest Changes from GitHub".confirm no
 git config --global guitool."Push Committed Changes to GitHub".cmd "$(pwd)/bin/gpush"
 git config --global guitool."Push Committed Changes to GitHub".confirm yes
-git config --global guitool."Open File in Editor".cmd 'notepad "$FILENAME"'
+git config --global guitool."Open File in Editor".cmd 'gvim "$FILENAME"'
 git config --global guitool."Open File in Editor".noconsole yes
 git config --global guitool."View Changes Externally".cmd 'git difftool -- "$FILENAME"'
 git config --global guitool."View Changes Externally".noconsole yes
 git config --global guitool."View Staged Changes Externally".cmd 'git difftool --staged -- "$FILENAME"'
 git config --global guitool."View Staged Changes Externally".noconsole yes
+git config --global guitool."Fix Trailing Whitespace on Staged File".cmd "$(pwd)/bin/fixtrailingwhitespace \" \$FILENAME\""
+git config --global guitool."Fix Trailing Whitespace on Staged File".noconsole yes
 
 if [ -e /c ]; then
   echo "Using Windows Credential Store"
@@ -55,4 +58,13 @@ if [ -e /c ]; then
   DIFF=$(echo $ToolDrive:$ToolPath \"\$LOCAL\" \"\$REMOTE\")
 
   git config --global difftool.diffmerge.cmd "$DIFF"
+else
+  echo "Using Cache Credential Store (4 hour cached password)"
+  git config --global credential.helper "cache --timeout 14400"
+
+  if hash meld 2>/dev/null; then
+    echo "Using Meld as diff tool"
+    git config --global diff.tool meld
+    git config --global difftool.prompt false
+  fi
 fi
